@@ -55,7 +55,8 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
                 ?>
                 <!-- dashboard -->
                 <div id="dashboard">
-                    <h2>Dashboard</h2>
+                    <h2 class="page-head">Dashboard</h2>
+                    <hr>
                     <div class="main">
                         <div class="dash-top">
                             <div class="card">

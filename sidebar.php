@@ -14,7 +14,7 @@
             <li><a href="#Tests">Tests</a></li>
             <li><a href="#billing">Billing</a></li>
             <li><a href="#reports">Reports</a></li>
-            <li><a href="/settings.php">Settings</a></li>
+            <li><a href="./settings.php">Profile Settings</a></li>
         </ul>
     </div>
 </div>

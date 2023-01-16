@@ -139,7 +139,9 @@ nav img {
 #settings {
   min-height: 100vh;
 }
-
+.page-head {
+  padding: 20px;
+}
 .main {
   width: 100%;
 }
@@ -190,4 +192,22 @@ table tr td:last-child a:visited {
 .dash-b-head {
   display: flex;
   justify-content: space-between;
+}
+.main form {
+  width: 70%;
+  margin: auto;
+  padding: 20px 0;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #e6e6e6;
+  margin-top: 20px;
+}
+.form-group {
+  margin: 20px;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
 }

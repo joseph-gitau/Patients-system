@@ -107,3 +107,23 @@ if (isset($_POST['login_user'])) {
         header('location: ./auth/login.php');
     }
 }
+// update user details
+if (isset($_POST['update_profile'])) {
+    $id = $_SESSION['id'];
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $phone_no = mysqli_real_escape_string($conn, $_POST['phone_no']);
+    $address = mysqli_real_escape_string($conn, $_POST['address']);
+
+    $query = "UPDATE user_doctor SET username='$username', email='$email', phone_no='$phone_no', address='$address' WHERE id='$id'";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $_SESSION['id'] = $id;
+        $_SESSION['username'] = $username;
+        $_SESSION['success'] = "Profile updated successfully!";
+        header('location: ./settings.php');
+    } else {
+        $_SESSION['errors'] = "Error updating profile!";
+        header('location: ./settings.php');
+    }
+}
