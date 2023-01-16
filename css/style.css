@@ -61,8 +61,8 @@ a:hover {
   margin: 10px;
 }
 .btn:hover {
-  background: #fff;
-  color: #0080ff;
+  background: #5b5bff;
+  color: #eaf4ff;
   transition: 0.15s;
 }
 /* success div */
@@ -210,4 +210,21 @@ input {
   padding: 10px;
   border: 1px solid #e6e6e6;
   border-radius: 5px;
+}
+.hidden {
+  visibility: hidden;
+}
+.btn_link {
+  background: #0080ff;
+  color: #fff;
+  padding: 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px 20px;
+  text-decoration: none;
+}
+.btn_link:hover {
+  background: #fff;
+  color: #eaf4ff;
+  transition: 0.15s;
 }

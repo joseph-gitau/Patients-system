@@ -7,7 +7,7 @@
     <div class="navigation">
         <ul>
             <li><a href="#dashboard">Dashboard</a></li>
-            <li><a href="#patients">Patients</a></li>
+            <li><a href="./patients/patients.php">Patients</a></li>
             <li><a href="#appointments">Appointments</a></li>
             <li><a href="#prescriptions">Prescriptions</a></li>
             <li><a href="#drugs">Drugs</a></li>

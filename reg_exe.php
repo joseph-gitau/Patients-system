@@ -127,3 +127,52 @@ if (isset($_POST['update_profile'])) {
         header('location: ./settings.php');
     }
 }
+// add new patient
+if (isset($_POST['add_patient'])) {
+    $doctor_id = $_SESSION['id'];
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $phone_no = mysqli_real_escape_string($conn, $_POST['phone_no']);
+    $birth_date = mysqli_real_escape_string($conn, $_POST['birthday']);
+    $gender = mysqli_real_escape_string($conn, $_POST['gender']);
+    $blood_group = mysqli_real_escape_string($conn, $_POST['bloodgroup']);
+    $address = mysqli_real_escape_string($conn, $_POST['address']);
+    $weight = mysqli_real_escape_string($conn, $_POST['weight']);
+    $height = mysqli_real_escape_string($conn, $_POST['height']);
+
+    $query = "INSERT INTO user_patient (doctor_id, name, email, phone_no, birthday, gender, bloodgroup, address, weight, height) VALUES('$doctor_id', '$name', '$email', '$phone_no', '$birth_date', '$gender', '$blood_group', '$address', '$weight', '$height')";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $_SESSION['success'] = "Patient added successfully!";
+        header('location: ./patients/patients.php');
+    } else {
+        // get the actual error
+        //$_SESSION['errors'] = mysqli_error($conn);
+        $_SESSION['errors'] = "Error adding patient!";
+        header('location: ./patients/patients.php');
+    }
+}
+// update patient details
+if (isset($_POST['update_patient'])) {
+    $id = $_SESSION['id'];
+    $name = mysqli_real_escape_string($conn, $_POST['name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $phone_no = mysqli_real_escape_string($conn, $_POST['phone_no']);
+    $birth_date = mysqli_real_escape_string($conn, $_POST['birthday']);
+    $gender = mysqli_real_escape_string($conn, $_POST['gender']);
+    $blood_group = mysqli_real_escape_string($conn, $_POST['bloodgroup']);
+    $address = mysqli_real_escape_string($conn, $_POST['address']);
+    $weight = mysqli_real_escape_string($conn, $_POST['weight']);
+    $height = mysqli_real_escape_string($conn, $_POST['height']);
+
+    $query = "UPDATE user_patient SET id='$id', name='$name', email='$email', phone_no='$phone_no', birthday='$birth_date', gender='$gender', bloodgroup='$blood_group', address='$address', weight='$weight', height='$height' WHERE id='$id'";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $_SESSION['success'] = "Patient record updated successfully!";
+        header('location: ./patients/patients.php');
+    } else {
+        // $_SESSION['errors'] = mysqli_error($conn);
+        $_SESSION['errors'] = "Error updating patient record!";
+        header('location: ./patients/patients.php');
+    }
+}
