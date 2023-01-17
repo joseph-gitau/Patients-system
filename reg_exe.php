@@ -176,3 +176,40 @@ if (isset($_POST['update_patient'])) {
         header('location: ./patients/patients.php');
     }
 }
+// add_drug
+if (isset($_POST['add_drug'])) {
+    $doctor_id = $_SESSION['id'];
+    $trade_name = mysqli_real_escape_string($conn, $_POST['trade_name']);
+    $generic_name = mysqli_real_escape_string($conn, $_POST['generic_name']);
+    $note = mysqli_real_escape_string($conn, $_POST['note']);
+
+    $query = "INSERT INTO drugs (doctor_id, trade_name, generic_name, note) VALUES('$doctor_id', '$trade_name', '$generic_name', '$note')";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $_SESSION['success'] = "Drug added successfully!";
+        header('location: ./drugs/drugs.php');
+    } else {
+        // get the actual error
+        //$_SESSION['errors'] = mysqli_error($conn);
+        $_SESSION['errors'] = "Error adding drug!";
+        header('location: ./drugs/drugs.php');
+    }
+}
+// add_test
+if (isset($_POST['add_test'])) {
+    $doctor_id = $_SESSION['id'];
+    $test_name = mysqli_real_escape_string($conn, $_POST['test_name']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
+
+    $query = "INSERT INTO tests (doctor_id, test_name, description) VALUES('$doctor_id', '$test_name', '$description')";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $_SESSION['success'] = "Test added successfully!";
+        header('location: ./tests/tests.php');
+    } else {
+        // get the actual error
+        //$_SESSION['errors'] = mysqli_error($conn);
+        $_SESSION['errors'] = "Error adding test!";
+        header('location: ./tests/tests.php');
+    }
+}

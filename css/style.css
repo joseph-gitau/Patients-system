@@ -205,7 +205,8 @@ table tr td:last-child a:visited {
 .form-group {
   margin: 20px;
 }
-input {
+input,
+textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #e6e6e6;
