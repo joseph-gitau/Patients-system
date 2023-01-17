@@ -213,3 +213,46 @@ if (isset($_POST['add_test'])) {
         header('location: ./tests/tests.php');
     }
 }
+// add_appointment
+if (isset($_POST['add_appointment'])) {
+    $doctor_id = $_SESSION['id'];
+    $patient_id = mysqli_real_escape_string($conn, $_POST['patient_id']);
+    $appointment_date = mysqli_real_escape_string($conn, $_POST['appointment_date']);
+    $timeslot = mysqli_real_escape_string($conn, $_POST['timeslot']);
+    $status = mysqli_real_escape_string($conn, $_POST['status']);
+
+    $query = "INSERT INTO appointments (doctor_id, patient, date, timeslot, status) VALUES('$doctor_id', '$patient_id', '$appointment_date', '$timeslot', '$status')";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $_SESSION['success'] = "Appointment added successfully!";
+        header('location: ./appointments/appointments.php');
+    } else {
+        // get the actual error
+        // $_SESSION['errors'] = mysqli_error($conn);
+        $_SESSION['errors'] = "Error adding appointment!";
+        header('location: ./appointments/appointments.php');
+    }
+}
+// add_prescription
+if (isset($_POST['add_prescription'])) {
+    $doctor_id = $_SESSION['id'];
+    $patient_id = mysqli_real_escape_string($conn, $_POST['patient_id']);
+    $date = mysqli_real_escape_string($conn, $_POST['appointment_date']);
+    $drug_id = mysqli_real_escape_string($conn, $_POST['drug_id']);
+    $dosage = mysqli_real_escape_string($conn, $_POST['dosage']);
+    $frequency = mysqli_real_escape_string($conn, $_POST['frequency']);
+    $test_id = mysqli_real_escape_string($conn, $_POST['test_name']);
+    $note = mysqli_real_escape_string($conn, $_POST['notes']);
+
+    $query = "INSERT INTO prescriptions (doctor_id, patient, date, drug_id, dosage, frequency, test_id, content) VALUES('$doctor_id', '$patient_id', '$date', '$drug_id', '$dosage', '$frequency', '$test_id', '$note')";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $_SESSION['success'] = "Prescription added successfully!";
+        header('location: ./prescriptions/prescriptions.php');
+    } else {
+        // get the actual error
+        // $_SESSION['errors'] = mysqli_error($conn);
+        $_SESSION['errors'] = "Error adding prescription!";
+        header('location: ./prescriptions/prescriptions.php');
+    }
+}

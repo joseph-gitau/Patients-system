@@ -3,7 +3,7 @@ session_start();
 // check if user is logged in
 if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
     $_SESSION['msg'] = "You must log in first";
-    header('location: ./auth/login.php');
+    header('location: ../auth/login.php');
 }
 ?>
 
@@ -17,7 +17,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
     <title>Online Patient Information Management System (OPIMS):</title>
 
     <!-- css -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -25,7 +25,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
 
         <div class="left">
             <!-- include sidebar -->
-            <?php include './sidebar.php'; ?>
+            <?php include '../sidebar.php'; ?>
         </div>
         <div class="right">
             <nav>
@@ -34,11 +34,11 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
                 <div class="profile">
                     <a href="#" id="dropdown-toggle">
                         <span>Hello, <?php echo $_SESSION['username']; ?></span>
-                        <img src="./images/user.png" alt="profile">
+                        <img src="../images/user.png" alt="profile">
                     </a>
                     <div id="dropdown-menu">
-                        <a href="./settings">Profile Settings</a>
-                        <a href="./auth/logout.php">Logout</a>
+                        <a href="../settings">Profile Settings</a>
+                        <a href="../auth/logout.php">Logout</a>
                     </div>
                 </div>
 
@@ -67,35 +67,48 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
                         <div class="dash-bottom">
                             <div class="dash-b-head">
                                 <h4 class="hidden">sp</h4>
-                                <button class="btn"><a href="./create.php?t=new">Add new </a></button>
+                                <button class="btn"><a href="./create.php?t=new">Add a new prescription</a></button>
                             </div>
 
                             <table>
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Trade Name</th>
-                                        <th>Generic Name</th>
+                                        <th>Patient</th>
+                                        <th>Date</th>
+                                        <th>Drug name</th>
+                                        <th>Contents</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    include './dbh.php';
+                                    include '../dbh.php';
                                     $doctor_id = $_SESSION['id'];
-                                    $sql = "SELECT * FROM user_patient WHERE doctor_id = '$doctor_id'";
+                                    $sql = "SELECT * FROM prescriptions WHERE doctor_id = '$doctor_id'";
                                     $result = mysqli_query($conn, $sql);
                                     $resultCheck = mysqli_num_rows($result);
                                     if ($resultCheck > 0) {
                                         while ($row = mysqli_fetch_assoc($result)) {
+                                            // get patient name
+                                            $patient_id = $row['patient'];
+                                            $sql = "SELECT * FROM user_patient WHERE id = '$patient_id'";
+                                            $result2 = mysqli_query($conn, $sql);
+                                            $row2 = mysqli_fetch_assoc($result2);
+                                            $patient_name = $row2['name'];
+                                            // get drug_name
+                                            $drug_id = $row['drug_id'];
+                                            $sql1 = "SELECT * FROM drugs WHERE id = '$drug_id'";
+                                            $result1 = mysqli_query($conn, $sql1);
+                                            $row1 = mysqli_fetch_assoc($result1);
+                                            $drug_name = $row1['trade_name'];
                                             echo '
                                            <tr>
                                                 <td>' . $row['id'] . '</td>
-                                                <td>' . $row['name'] . '</td>
-                                                <td>' . $row['phone_no'] . '</td>
-                                                <td>' . $row['birthday'] . '</td>
-                                                <td>' . $row['gender'] . '</td>
-                                                <td>' . $row['address'] . '</td>
+                                                <td>' . $patient_name . '</td>
+                                                <td>' . $row['date'] . '</td>
+                                                <td>' . $drug_name . '</td>
+                                                <td>' . $row['content'] . '</td>
                                                 <td>
                                                     <a href="./create.php?t=view&id=' . $row['id'] . '" class="btn-link">View</a>
                                                     <a href="./create.php?t=edit&id=' . $row['id'] . '" class="btn-link">Edit</a>
@@ -104,21 +117,13 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
                                             </tr>
                                         ';
                                         }
+                                    } else {
+                                        echo '
+                                        <tr>
+                                            <td colspan="5">No prescriptions found</td>
+                                        </tr>';
                                     }
                                     ?>
-                                    <!-- <tr>
-                                        <td>1</td>
-                                        <td>John Doe</td>
-                                        <td>123456789</td>
-                                        <td>12/12/1990</td>
-                                        <td>Male</td>
-                                        <td>1234, Street, City, Country</td>
-                                        <td>
-                                            <a href="#" class="btn-link">View</a>
-                                            <a href="#" class="btn-link">Edit</a>
-                                            <a href="#" class="btn-link">Delete</a>
-                                        </td>
-                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>
@@ -131,7 +136,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
     </div>
 
     <!-- script -->
-    <script src="./js/index.js"></script>
+    <script src="../js/index.js"></script>
 </body>
 
 </html>
