@@ -1,5 +1,5 @@
 <?php
-// if seession is not started, start it
+// if session is not started, start it
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -8,13 +8,13 @@ if (!isset($_SESSION)) {
 <html>
 
 <head>
-    <title>Registration system PHP and MySQL</title>
+    <title>Login - Online Patient Information Management System (OPIMS):</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
     <div class="header">
-        <h2>Login</h2>
+        <h2>OPIMS Login</h2>
     </div>
 
     <form method="post" action="../reg_exe.php">

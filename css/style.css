@@ -41,8 +41,16 @@ ul {
   list-style-type: none;
 }
 li {
-  padding: 15px;
+  padding: 10px 15px;
   border-bottom: 1px solid #fff;
+}
+.sidebar-head-txt {
+  font-size: 20px;
+  color: #c0c0c0;
+}
+.sidebar-head-txt-sub {
+  font-size: 15px;
+  padding: 10px 20px;
 }
 a {
   text-decoration: none;
