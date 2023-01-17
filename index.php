@@ -79,6 +79,18 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
                             $query3 = "SELECT * FROM prescriptions WHERE doctor_id = '$user_id'";
                             $result3 = mysqli_query($conn, $query3);
                             $total_prescriptions = mysqli_num_rows($result3);
+                            // total amount paid
+                            $query4 = "SELECT * FROM billing WHERE doctor_id = '$user_id' AND payment_status = 'paid'";
+                            $result4 = mysqli_query($conn, $query4);
+                            $total_amount_paid = mysqli_num_rows($result4);
+                            if ($total_amount_paid > 0) {
+                                $all_total = 0;
+                                while ($row = mysqli_fetch_assoc($result4)) {
+                                    $all_total += $row['amount'];
+                                }
+                            } else {
+                                $all_total = 0;
+                            }
 
                             ?>
                             <div class="card">
@@ -131,7 +143,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['id'])) {
                                     <h4>Total payment</h4>
                                 </div>
                                 <div class="card-body">
-                                    <h1>0</h1>
+                                    <h1><?php echo $all_total; ?> Ksh</h1>
                                 </div>
                             </div>
                         </div>

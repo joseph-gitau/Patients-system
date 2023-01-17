@@ -18,7 +18,7 @@
             <li><a href="<?php echo $path; ?>/prescriptions/prescriptions.php">Prescriptions</a></li>
             <li><a href="<?php echo $path; ?>/drugs/drugs.php">Drugs</a></li>
             <li><a href="<?php echo $path; ?>/tests/tests.php">Tests</a></li>
-            <li><a href="<?php echo $path; ?>/billing">Billing</a></li>
+            <li><a href="<?php echo $path; ?>/billing/billing.php">Billing</a></li>
             <li><a href="<?php echo $path; ?>/reports">Reports</a></li>
             <li><a href="<?php echo $path; ?>/settings.php">Profile Settings</a></li>
         </ul>

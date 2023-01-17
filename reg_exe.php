@@ -256,3 +256,24 @@ if (isset($_POST['add_prescription'])) {
         header('location: ./prescriptions/prescriptions.php');
     }
 }
+// add_invoice
+if (isset($_POST['add_invoice'])) {
+    $doctor_id = $_SESSION['id'];
+    $patient_id = mysqli_real_escape_string($conn, $_POST['patient_id']);
+    $payment_method = mysqli_real_escape_string($conn, $_POST['payment_method']);
+    $payment_status = mysqli_real_escape_string($conn, $_POST['payment_status']);
+    $invoice_title = mysqli_real_escape_string($conn, $_POST['invoice_title']);
+    $amount = mysqli_real_escape_string($conn, $_POST['amount']);
+
+    $query = "INSERT INTO billing (doctor_id, patient_id, payment_method, payment_status, invoice_title, amount) VALUES('$doctor_id', '$patient_id', '$payment_method', '$payment_status', '$invoice_title', '$amount')";
+    $results = mysqli_query($conn, $query);
+    if ($results) {
+        $_SESSION['success'] = "Invoice added successfully!";
+        header('location: ./billing/billing.php');
+    } else {
+        // get the actual error
+        $_SESSION['errors'] = mysqli_error($conn);
+        // $_SESSION['errors'] = "Error adding invoice!";
+        header('location: ./billing/billing.php');
+    }
+}
